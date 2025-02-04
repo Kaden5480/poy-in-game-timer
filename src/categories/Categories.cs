@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace InGameTimer.Categories {
     // 100%
     public class FullBaseGame : Category {
@@ -7,6 +9,40 @@ namespace InGameTimer.Categories {
             return Progression.Peaks.CompletedBaseGame()
                 && Progression.Artefacts.UnlockedAllBaseGame()
                 && Progression.Tools.UnlockedAll();
+        }
+
+        public override IEnumerable<(string, string)> GetUIInfo() {
+            // Peaks
+            yield return ("Peaks", $"{GameManager.control.progression}/37");
+            foreach ((string displayName, string state) in base.GetUIInfo()) {
+                yield return (displayName, state);
+            }
+
+            // Collectables
+            int artefactCount = 0;
+            foreach (Progression.Artefact artefact in Progression.Artefacts.baseGame) {
+                if (artefact.IsUnlocked()) {
+                    artefactCount++;
+                }
+            }
+
+            yield return ("Artefacts", $"{artefactCount}/20");
+            foreach (Progression.Artefact artefact in Progression.Artefacts.baseGame) {
+                yield return (artefact.displayName, artefact.IsUnlocked().ToString());
+            }
+
+            // Tools
+            int toolCount = 0;
+            foreach (Progression.Tool tool in Progression.Tools.tools) {
+                if (tool.IsUnlocked()) {
+                    toolCount++;
+                }
+            }
+
+            yield return ("Tools", $"{toolCount}/13");
+            foreach (Progression.Tool tool in Progression.Tools.tools) {
+                yield return (tool.displayName, tool.IsUnlocked().ToString());
+            }
         }
     }
 

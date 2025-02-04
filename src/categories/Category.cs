@@ -47,5 +47,12 @@ namespace InGameTimer {
                 entry.Value.completed = false;
             }
         }
+
+        public virtual IEnumerable<(string, string)> GetUIInfo() {
+            foreach (KeyValuePair<string, SceneState> entry in sceneStates) {
+                SceneState state = entry.Value;
+                yield return (state.info.displayName, state.completed.ToString());
+            }
+        }
     }
 }
