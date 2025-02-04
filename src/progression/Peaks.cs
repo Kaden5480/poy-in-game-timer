@@ -4,13 +4,7 @@ namespace InGameTimer.Progression {
     public class Peaks {
         private static bool CompletedAll(SceneInfo[] peaks) {
             foreach (SceneInfo info in peaks) {
-                Console.WriteLine($"Checking: {info.displayName}");
-
-                bool completed = (bool) typeof(GameManager)
-                    .GetField(info.gameManagerName)
-                    .GetValue(GameManager.control);
-
-                if (completed == false) {
+                if (info.Completed() == false) {
                     return false;
                 }
             }

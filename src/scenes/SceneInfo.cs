@@ -42,5 +42,21 @@ namespace InGameTimer {
         public bool IsScene(string sceneName) {
             return internalName.Equals(sceneName);
         }
+
+        /**
+         * <summary>
+         * Checks if this scene is a peak and has been completed.
+         * </summary>
+         * <return>True if it is a peak and is completed, false otherwise
+         */
+        public bool Completed() {
+            if (gameManagerName == null) {
+                return false;
+            }
+
+            return (bool) typeof(GameManager)
+                .GetField(gameManagerName)
+                .GetValue(GameManager.control);
+        }
     }
 }
