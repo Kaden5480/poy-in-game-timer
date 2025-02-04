@@ -50,6 +50,14 @@ namespace InGameTimer.UI {
             outline.effectDistance = new Vector2(2f, -2f);
         }
 
+        public void SetCategory(Category category) {
+            logic.SetCategory(category);
+        }
+
+        public Category GetCategory() {
+            return logic.category;
+        }
+
         public void CompleteScene(string sceneName) {
             logic.CompleteScene(sceneName);
         }
