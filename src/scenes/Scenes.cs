@@ -53,27 +53,39 @@ namespace InGameTimer {
         public static SceneInfo trueEnding       { get; } = new SceneInfo("GameEnding_TrueEnding", "True Ending");
 
         // All fundamental peaks
-        public static SceneInfo[] categoryFundamentals = new[] {
+        public static SceneInfo[] fundamentalPeaks = new[] {
             greenhornsTop, paltryPeak, oldMill, grayGully, theLighthouse, oldManOfSjor,
             giantsShelf, evergreensEnd, theTwins, oldGrovesSkelf, hangmansLeap, landsEnd,
             oldLangr, aldrGrotto, threeBrothers, waltersCrag, theGreatCrevice, oldHagger,
-            ugsomeStorr, wutheringCrest
+            ugsomeStorr, wutheringCrest,
         };
 
         // All intermediate peaks
-        public static SceneInfo[] categoryIntermediate = new[] {
+        public static SceneInfo[] intermediatePeaks = new[] {
             portersBoulder, jotunnsThumb, oldSkerry, hamarrStone, giantsNose,
-            waltersBoulder, sunderedSons, oldWealdsBoulder, leaningSpire, cromlech
+            waltersBoulder, sunderedSons, oldWealdsBoulder, leaningSpire, cromlech,
         };
 
         // All advanced peaks
-        public static SceneInfo[] categoryAdvanced = new[] {
-            walkersPillar, greatGaol, eldenhorn, stHaelga, ymirsShadow
+        public static SceneInfo[] advancedPeaks = new[] {
+            walkersPillar, greatGaol, eldenhorn, stHaelga, ymirsShadow,
         };
 
         // All expert peaks
-        public static SceneInfo[] categoryExpert = new[] {
-            greatBulwark, solemnTempest
+        public static SceneInfo[] expertPeaks = new[] {
+            greatBulwark, solemnTempest,
+        };
+
+        // All peaks in the base game
+        public static SceneInfo[] baseGamePeaks = new[] {
+            greenhornsTop, paltryPeak, oldMill, grayGully, theLighthouse, oldManOfSjor,
+            giantsShelf, evergreensEnd, theTwins, oldGrovesSkelf, hangmansLeap, landsEnd,
+            oldLangr, aldrGrotto, threeBrothers, waltersCrag, theGreatCrevice, oldHagger,
+            ugsomeStorr, wutheringCrest,
+            portersBoulder, jotunnsThumb, oldSkerry, hamarrStone, giantsNose,
+            waltersBoulder, sunderedSons, oldWealdsBoulder, leaningSpire, cromlech,
+            walkersPillar, greatGaol, eldenhorn, stHaelga, ymirsShadow,
+            greatBulwark, solemnTempest,
         };
 
         /**
@@ -84,7 +96,7 @@ namespace InGameTimer {
          * <return>True if it is, false otherwise</return>
          */
         public static bool IsFundamental(string sceneName) {
-            foreach (SceneInfo info in categoryFundamentals) {
+            foreach (SceneInfo info in fundamentalPeaks) {
                 if (info.IsScene(sceneName)) {
                     return true;
                 }
@@ -101,7 +113,7 @@ namespace InGameTimer {
          * <return>True if it is, false otherwise</return>
          */
         public static bool IsIntermediate(string sceneName) {
-            foreach (SceneInfo info in categoryIntermediate) {
+            foreach (SceneInfo info in intermediatePeaks) {
                 if (info.IsScene(sceneName)) {
                     return true;
                 }
@@ -118,7 +130,7 @@ namespace InGameTimer {
          * <return>True if it is, false otherwise</return>
          */
         public static bool IsAdvanced(string sceneName) {
-            foreach (SceneInfo info in categoryAdvanced) {
+            foreach (SceneInfo info in advancedPeaks) {
                 if (info.IsScene(sceneName)) {
                     return true;
                 }
@@ -135,7 +147,7 @@ namespace InGameTimer {
          * <return>True if it is, false otherwise</return>
          */
         public static bool IsExpert(string sceneName) {
-            foreach (SceneInfo info in categoryExpert) {
+            foreach (SceneInfo info in expertPeaks) {
                 if (info.IsScene(sceneName)) {
                     return true;
                 }
@@ -146,14 +158,19 @@ namespace InGameTimer {
 
         /**
          * <summary>
-         * Checks if a scene is a peak.
+         * Checks if a scene is a base game peak.
          * </summary>
          * <param name="sceneName">The name of the scene to check</param>
          * <return>True if it is, false otherwise</return>
          */
-        public static bool IsPeak(string sceneName) {
-            return IsFundamental(sceneName) || IsIntermediate(sceneName)
-                || IsAdvanced(sceneName) || IsExpert(sceneName);
+        public static bool IsBaseGamePeak(string sceneName) {
+            foreach (SceneInfo info in baseGamePeaks) {
+                if (info.IsScene(sceneName)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

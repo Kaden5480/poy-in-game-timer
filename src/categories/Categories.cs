@@ -4,19 +4,7 @@ namespace InGameTimer.Categories {
         public AllPeaks() {
             name = "All Peaks";
 
-            foreach (SceneInfo info in Scenes.categoryFundamentals) {
-                sceneStates.Add(info.internalName, false);
-            }
-
-            foreach (SceneInfo info in Scenes.categoryIntermediate) {
-                sceneStates.Add(info.internalName, false);
-            }
-
-            foreach (SceneInfo info in Scenes.categoryAdvanced) {
-                sceneStates.Add(info.internalName, false);
-            }
-
-            foreach (SceneInfo info in Scenes.categoryExpert) {
+            foreach (SceneInfo info in Scenes.baseGamePeaks) {
                 sceneStates.Add(info.internalName, false);
             }
         }
@@ -27,7 +15,7 @@ namespace InGameTimer.Categories {
         public Fundamentals() {
             name = "Fundamentals%";
 
-            foreach (SceneInfo info in Scenes.categoryFundamentals) {
+            foreach (SceneInfo info in Scenes.fundamentalPeaks) {
                 sceneStates.Add(info.internalName, false);
             }
         }
@@ -38,7 +26,7 @@ namespace InGameTimer.Categories {
         public Intermediate() {
             name = "Intermediate%";
 
-            foreach (SceneInfo info in Scenes.categoryIntermediate) {
+            foreach (SceneInfo info in Scenes.intermediatePeaks) {
                 sceneStates.Add(info.internalName, false);
             }
         }
@@ -49,7 +37,7 @@ namespace InGameTimer.Categories {
         public Advanced() {
             name = "Advanced%";
 
-            foreach (SceneInfo info in Scenes.categoryAdvanced) {
+            foreach (SceneInfo info in Scenes.advancedPeaks) {
                 sceneStates.Add(info.internalName, false);
             }
         }
@@ -60,7 +48,7 @@ namespace InGameTimer.Categories {
         public Expert() {
             name = "Expert%";
 
-            foreach (SceneInfo info in Scenes.categoryExpert) {
+            foreach (SceneInfo info in Scenes.expertPeaks) {
                 sceneStates.Add(info.internalName, false);
             }
         }
