@@ -10,13 +10,9 @@ namespace InGameTimer.Categories {
         }
 
         public override bool EndTimer(string sceneName) {
-            bool allUnlocks = Progression.Peaks.CompletedBaseGame()
+            return Progression.Peaks.CompletedBaseGame()
                 && Progression.Artefacts.UnlockedAllBaseGame()
                 && Progression.Tools.UnlockedAll();
-
-            bool trueEnding = Scenes.TrueEnding.IsScene(sceneName) || GameManager.control.game_complete_fullgame;
-
-            return allUnlocks && trueEnding;
         }
     }
 
