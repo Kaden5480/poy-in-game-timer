@@ -1,6 +1,4 @@
 namespace InGameTimer.Categories {
-    // TODO: Use the stamp to mark peaks as complete
-
     // 100%
     public class FullBaseGame: Category {
         public FullBaseGame() {
@@ -12,9 +10,13 @@ namespace InGameTimer.Categories {
         }
 
         public override bool EndTimer(string sceneName) {
-            return Progression.Peaks.CompletedAllBaseGame()
+            bool allUnlocks = Progression.Peaks.CompletedBaseGame()
                 && Progression.Artefacts.UnlockedAllBaseGame()
                 && Progression.Tools.UnlockedAll();
+
+            bool trueEnding = Scenes.TrueEnding.IsScene(sceneName) || GameManager.control.game_complete_fullgame;
+
+            return allUnlocks && trueEnding;
         }
     }
 
@@ -41,6 +43,10 @@ namespace InGameTimer.Categories {
             foreach (SceneInfo info in Scenes.baseGamePeaks) {
                 sceneStates.Add(info.internalName, false);
             }
+        }
+
+        public override bool EndTimer(string sceneName) {
+            return Progression.Peaks.CompletedBaseGame();
         }
     }
 

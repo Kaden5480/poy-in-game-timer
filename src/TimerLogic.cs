@@ -13,7 +13,7 @@ namespace InGameTimer {
         }
 
         public void Reset() {
-            category = new Categories.Expert();
+            category = new Categories.Intermediate();
             currentScene = "";
             running = false;
             timer = 0f;
@@ -49,10 +49,6 @@ namespace InGameTimer {
             if (category.EndTimer(sceneName)) {
                 running = false;
             }
-        }
-
-        public void UnloadScene(string sceneName) {
-            category.CompleteScene(sceneName);
         }
     }
 }

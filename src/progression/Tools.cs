@@ -31,11 +31,15 @@ namespace InGameTimer.Progression {
             new Tool("phonograph",      "Phonograph"),
         };
 
-        public bool UnlockedAll() {
+        public static bool UnlockedAll() {
             foreach (Tool tool in tools) {
                 if (tool.IsUnlocked() == false) {
                     return false;
                 }
+            }
+
+            if (GameManager.control.ropesCollected < 42) {
+                return false;
             }
 
             return true;

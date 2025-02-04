@@ -20,9 +20,9 @@ namespace InGameTimer {
          */
         public void Awake() {
             Harmony.CreateAndPatchAll(typeof(PatchMoveTimeAttack));
+            Harmony.CreateAndPatchAll(typeof(PatchStampJournal));
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
 
             CommonAwake();
         }
@@ -34,7 +34,6 @@ namespace InGameTimer {
          */
         public void OnDestroy() {
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            SceneManager.sceneUnloaded -= OnSceneUnloaded;
         }
 
         /*
@@ -46,16 +45,6 @@ namespace InGameTimer {
          */
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
             CommonSceneLoad(scene.buildIndex, scene.name);
-        }
-
-        /**
-         * <summary>
-         * Executes whenever a scene unloads.
-         * </summary>
-         * <param name="scene">The scene which unloaded</param>
-         */
-        public void OnSceneUnloaded(Scene scene) {
-            CommonSceneUnload(scene.buildIndex, scene.name);
         }
 
         /*
@@ -100,23 +89,18 @@ namespace InGameTimer {
             CommonSceneLoad(buildIndex, sceneName);
         }
 
-        /**
-         * <summary>
-         * Executes whenever a scene unloads.
-         * </summary>
-         * <param name="buildIndex">The build index of the scene</param>
-         * <param name="sceneName">The name of the scene</param>
-         */
-        public override void OnSceneWasUnloaded(int buildIndex, string sceneName) {
-            CommonSceneUnload(buildIndex, sceneName);
-        }
-
 #endif
+        private static Plugin plugin = null;
+
         private GameObject gui = null;
         private GameObject timerObj = null;
         private Text timerText = null;
 
-        private TimerLogic logic = new TimerLogic();
+        public TimerLogic logic { get; } = new TimerLogic();
+
+        public Plugin() {
+            plugin = this;
+        }
 
         /**
          * <summary>
@@ -175,25 +159,7 @@ namespace InGameTimer {
          * <param name="sceneName">The name of the scene</param>
          */
         private void CommonSceneLoad(int buildIndex, string sceneName) {
-            if (Progression.Peaks.CompletedAllBaseGame() == true) {
-                Console.WriteLine("All peaks done");
-            }
-            else {
-                Console.WriteLine("Not all peaks done");
-            }
-
             logic.LoadScene(sceneName);
-        }
-
-        /**
-         * <summary>
-         * Common code to run on each scene unload.
-         * </summary>
-         * <param name="buildIndex">The build index of the scene</param>
-         * <param name="sceneName">The name of the scene</param>
-         */
-        private void CommonSceneUnload(int buildIndex, string sceneName) {
-            logic.UnloadScene(sceneName);
         }
 
         /**
@@ -227,6 +193,19 @@ namespace InGameTimer {
                 Vector3 oldPosition = __instance.txtActivatedPoint.position;
                 Vector3 newPosition = new Vector3(oldPosition.x, oldPosition.y - 20, oldPosition.z);
                 __instance.txtActivatedPoint.position = newPosition;
+            }
+        }
+
+        /**
+         * <summary>
+         * Marks a scene as complete when stamping.
+         * </summary>
+         */
+        [HarmonyPatch(typeof(StamperPeakSummit), "StampJournal")]
+        static class PatchStampJournal {
+            static void Postfix(StamperPeakSummit __instance) {
+                string sceneName = SceneManager.GetActiveScene().name;
+                Plugin.plugin.logic.category.CompleteScene(sceneName);
             }
         }
     }
