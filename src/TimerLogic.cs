@@ -35,6 +35,10 @@ namespace InGameTimer {
             timer += Time.deltaTime;
         }
 
+        public void CompleteScene(string sceneName) {
+            category.CompleteScene(sceneName);
+        }
+
         public void LoadScene(string sceneName) {
             if (Scenes.titleScreen.IsScene(sceneName)) {
                 Reset();

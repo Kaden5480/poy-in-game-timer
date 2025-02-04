@@ -2,7 +2,6 @@ using System;
 
 using HarmonyLib;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 #if BEPINEX
@@ -91,12 +90,7 @@ namespace InGameTimer {
 
 #endif
         private static Plugin plugin = null;
-
-        private GameObject gui = null;
-        private GameObject timerObj = null;
-        private Text timerText = null;
-
-        public TimerLogic logic { get; } = new TimerLogic();
+        private UI.Timer timer = null;
 
         public Plugin() {
             plugin = this;
@@ -108,47 +102,7 @@ namespace InGameTimer {
          * </summary>
          */
         private void CommonAwake() {
-            MakeGUI();
-        }
-
-        /**
-         * <summary>
-         * Creates the timer UI.
-         * </summary>
-         */
-        private void MakeGUI() {
-            gui = new GameObject("IGT UI");
-            gui.layer = LayerMask.NameToLayer("UI");
-            GameObject.DontDestroyOnLoad(gui);
-
-            // Add canvas
-            Canvas canvas = gui.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 100;
-
-            gui.AddComponent<CanvasScaler>();
-            gui.AddComponent<GraphicRaycaster>();
-
-            timerObj = new GameObject("IGT Timer");
-            timerObj.transform.SetParent(gui.transform);
-
-            timerText = timerObj.AddComponent<Text>();
-
-            GameObject textObj = GameObject.Find("Text");
-            Text text = textObj.GetComponent<Text>();
-
-            timerText.font = text.font;
-            timerText.fontSize = 54;
-            logic.Reset();
-
-            timerText.rectTransform.anchorMin = new Vector2(0.053f, 0.945f);
-            timerText.rectTransform.anchorMax = new Vector2(1, 0.945f);
-            timerText.rectTransform.anchoredPosition = new Vector2(0, 0);
-
-            // Add outline
-            Outline outline = timerObj.AddComponent<Outline>();
-            outline.effectColor = new Color(0, 0, 0, 0.5f);
-            outline.effectDistance = new Vector2(2f, -2f);
+            timer = new UI.Timer();
         }
 
         /**
@@ -159,7 +113,7 @@ namespace InGameTimer {
          * <param name="sceneName">The name of the scene</param>
          */
         private void CommonSceneLoad(int buildIndex, string sceneName) {
-            logic.LoadScene(sceneName);
+            timer.LoadScene(sceneName);
         }
 
         /**
@@ -168,18 +122,7 @@ namespace InGameTimer {
          * </summary>
          */
         private void CommonUpdate() {
-            gui.SetActive(true);
-
-            logic.Update();
-
-            string categoryName = "N/A";
-
-            if (logic.category != null) {
-                categoryName = logic.category.name;
-            }
-
-            TimeSpan span = TimeSpan.FromSeconds(logic.GetTimer());
-            timerText.text = $"IGT ({categoryName}): {span.Hours:00}:{span.Minutes:00}:{span.Seconds:00}:{span.Milliseconds:00}";
+            timer.Update();
         }
 
         /**
@@ -205,7 +148,7 @@ namespace InGameTimer {
         static class PatchStampJournal {
             static void Postfix(StamperPeakSummit __instance) {
                 string sceneName = SceneManager.GetActiveScene().name;
-                Plugin.plugin.logic.category.CompleteScene(sceneName);
+                Plugin.plugin.timer.CompleteScene(sceneName);
             }
         }
     }
