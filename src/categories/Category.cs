@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using UnityEngine.SceneManagement;
@@ -41,6 +40,12 @@ namespace InGameTimer {
             }
 
             sceneStates[sceneName].completed = true;
+        }
+
+        public virtual void Reset() {
+            foreach (KeyValuePair<string, SceneState> entry in sceneStates) {
+                entry.Value.completed = false;
+            }
         }
     }
 }
