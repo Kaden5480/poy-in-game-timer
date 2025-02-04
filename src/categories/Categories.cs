@@ -1,4 +1,19 @@
 namespace InGameTimer.Categories {
+    // Any%
+    public class Any : Category {
+        public Any() {
+            name = "Any%";
+
+            foreach (SceneInfo info in Scenes.baseGamePeaks) {
+                sceneStates.Add(info.internalName, false);
+            }
+        }
+
+        public override bool EndTimer(string sceneName) {
+            return Scenes.normalEnding.IsScene(sceneName);
+        }
+    }
+
     // All Peaks
     public class AllPeaks : Category {
         public AllPeaks() {
