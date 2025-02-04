@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 namespace InGameTimer {
     public abstract class Category {
-        public string name = "";
-        public Dictionary<string, bool> sceneStates = new Dictionary<string, bool>();
+        public string name { get; }
+        public Dictionary<string, SceneState> sceneStates { get; }
+
+        public Category(string name, SceneInfo[] scenes) {
+            this.name = name;
+            sceneStates = new Dictionary<string, SceneState>();
+
+            foreach (SceneInfo info in scenes) {
+                sceneStates.Add(info.internalName, new SceneState(info));
+            }
+        }
 
         public virtual bool StartTimer(string sceneName) {
             return sceneStates.ContainsKey(sceneName);
@@ -15,8 +24,8 @@ namespace InGameTimer {
         public virtual bool EndTimer(string sceneName) {
             bool shouldEnd = true;
 
-            foreach (KeyValuePair<string, bool> entry in sceneStates) {
-                if (entry.Value == false) {
+            foreach (KeyValuePair<string, SceneState> entry in sceneStates) {
+                if (entry.Value.completed == false) {
                     shouldEnd = false;
                     break;
                 }
@@ -34,7 +43,7 @@ namespace InGameTimer {
                 return;
             }
 
-            sceneStates[sceneName] = true;
+            sceneStates[sceneName].completed = true;
         }
     }
 }

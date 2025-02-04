@@ -1,13 +1,7 @@
 namespace InGameTimer.Categories {
     // 100%
-    public class FullBaseGame: Category {
-        public FullBaseGame() {
-            name = "100%";
-
-            foreach (SceneInfo info in Scenes.baseGamePeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+    public class FullBaseGame : Category {
+        public FullBaseGame() : base("100%", Scenes.baseGamePeaks) {}
 
         public override bool EndTimer(string sceneName) {
             return Progression.Peaks.CompletedBaseGame()
@@ -18,13 +12,7 @@ namespace InGameTimer.Categories {
 
     // Any%
     public class Any : Category {
-        public Any() {
-            name = "Any%";
-
-            foreach (SceneInfo info in Scenes.baseGamePeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public Any() : base("Any%", Scenes.baseGamePeaks) {}
 
         public override bool EndTimer(string sceneName) {
             return Scenes.normalEnding.IsScene(sceneName);
@@ -33,13 +21,7 @@ namespace InGameTimer.Categories {
 
     // All Peaks
     public class AllPeaks : Category {
-        public AllPeaks() {
-            name = "All Peaks";
-
-            foreach (SceneInfo info in Scenes.baseGamePeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public AllPeaks() : base("All Peaks", Scenes.baseGamePeaks) {}
 
         public override bool EndTimer(string sceneName) {
             return Progression.Peaks.CompletedBaseGame();
@@ -48,45 +30,21 @@ namespace InGameTimer.Categories {
 
     // Fundamentals%
     public class Fundamentals : Category {
-        public Fundamentals() {
-            name = "Fundamentals%";
-
-            foreach (SceneInfo info in Scenes.fundamentalPeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public Fundamentals() : base("Fundamentals%", Scenes.fundamentalPeaks) {}
     }
 
     // Intermediate%
     public class Intermediate : Category {
-        public Intermediate() {
-            name = "Intermediate%";
-
-            foreach (SceneInfo info in Scenes.intermediatePeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public Intermediate() : base("Intermediate%", Scenes.intermediatePeaks) {}
     }
 
     // Advanced%
     public class Advanced : Category {
-        public Advanced() {
-            name = "Advanced%";
-
-            foreach (SceneInfo info in Scenes.advancedPeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public Advanced() : base("Advanced%", Scenes.advancedPeaks) {}
     }
 
     // Expert%
     public class Expert : Category {
-        public Expert() {
-            name = "Expert%";
-
-            foreach (SceneInfo info in Scenes.expertPeaks) {
-                sceneStates.Add(info.internalName, false);
-            }
-        }
+        public Expert() : base("Expert%", Scenes.expertPeaks) {}
     }
 }
