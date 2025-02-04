@@ -7,7 +7,9 @@ namespace InGameTimer {
         public string name = "";
         public Dictionary<string, bool> sceneStates = new Dictionary<string, bool>();
 
-        public abstract bool StartTimer(string sceneName);
+        public virtual bool StartTimer(string sceneName) {
+            return sceneStates.ContainsKey(sceneName);
+        }
 
         public virtual bool EndTimer(string sceneName) {
             bool shouldEnd = true;
