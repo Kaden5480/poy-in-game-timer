@@ -19,6 +19,12 @@ namespace InGameTimer {
             timer = 0f;
         }
 
+        public void SetCategory(Category category) {
+            Reset();
+            this.category = category;
+            category.Reset();
+        }
+
         public float GetTimer() {
             return timer;
         }
