@@ -22,16 +22,13 @@ namespace InGameTimer {
         }
 
         public virtual bool EndTimer(string sceneName) {
-            bool shouldEnd = true;
-
             foreach (KeyValuePair<string, SceneState> entry in sceneStates) {
                 if (entry.Value.completed == false) {
-                    shouldEnd = false;
-                    break;
+                    return false;
                 }
             }
 
-            return shouldEnd;
+            return true;
         }
 
         public virtual bool PauseTimer(string sceneName) {
