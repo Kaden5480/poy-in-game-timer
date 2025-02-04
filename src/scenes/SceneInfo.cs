@@ -4,6 +4,7 @@ namespace InGameTimer {
     public class SceneInfo {
         public string internalName { get; }
         public string displayName { get; }
+        public string gameManagerName { get; }
 
         /**
          * <summary>
@@ -11,10 +12,13 @@ namespace InGameTimer {
          * </summary>
          * <param name="internalName">The name of the scene internally</param>
          * <param name="displayName">The name to display for the scene</param>
+         * <param name="gameManagerName">The name of the GameManager field which
+         * stores whether this scene is completed (Only used for peaks)</param>
          */
-        public SceneInfo(string internalName, string displayName) {
+        public SceneInfo(string internalName, string displayName, string gameManagerName) {
             this.internalName = internalName;
             this.displayName = displayName;
+            this.gameManagerName = gameManagerName;
         }
 
         /**

@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 
 using HarmonyLib;
 using UnityEngine;
@@ -176,6 +175,13 @@ namespace InGameTimer {
          * <param name="sceneName">The name of the scene</param>
          */
         private void CommonSceneLoad(int buildIndex, string sceneName) {
+            if (Progression.Peaks.CompletedAllBaseGame() == true) {
+                Console.WriteLine("All peaks done");
+            }
+            else {
+                Console.WriteLine("Not all peaks done");
+            }
+
             logic.LoadScene(sceneName);
         }
 
