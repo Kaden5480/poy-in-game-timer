@@ -67,6 +67,8 @@ namespace InGameTimer.UI {
         }
 
         public void Update() {
+            logic.Update();
+
             uiObj.SetActive(true);
 
             string categoryName = "N/A";
