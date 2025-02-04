@@ -25,7 +25,7 @@ namespace InGameTimer.Progression {
             new Tool("chalkBag",        "Chalk"),
             new Tool("crampons",        "Crampons (6 Point)"),
             new Tool("cramponsUpgrade", "Crampons (10 Point)"),
-            new Tool("smokingPipe",     "Smoking Pipe"),
+            new Tool("smokingpipe",     "Smoking Pipe"),
             new Tool("artefactMap",     "Collectable Map"),
             new Tool("barometer",       "Barometer"),
             new Tool("phonograph",      "Phonograph"),
