@@ -9,11 +9,11 @@ namespace InGameTimer {
         public Category category = null;
 
         public TimerLogic() {
+            category = new Categories.Any();
             Reset();
         }
 
         public void Reset() {
-            category = new Categories.Intermediate();
             currentScene = "";
             running = false;
             timer = 0f;
