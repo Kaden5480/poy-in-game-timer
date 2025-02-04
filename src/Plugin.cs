@@ -22,8 +22,6 @@ namespace InGameTimer {
             Harmony.CreateAndPatchAll(typeof(PatchStampJournal));
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-
-            CommonAwake();
         }
 
         /**
@@ -64,10 +62,6 @@ using MelonLoader;
 
 namespace InGameTimer {
     public class Plugin: MelonMod {
-        public override void OnInitializeMelon() {
-            CommonAwake();
-        }
-
         /*
          * <summary>
          * Executes once per frame.
@@ -90,19 +84,11 @@ namespace InGameTimer {
 
 #endif
         private static Plugin plugin = null;
+
         private UI.Timer timer = null;
 
         public Plugin() {
             plugin = this;
-        }
-
-        /**
-         * <summary>
-         * Common code to execute on awake.
-         * </summary>
-         */
-        private void CommonAwake() {
-            timer = new UI.Timer();
         }
 
         /**
@@ -113,6 +99,10 @@ namespace InGameTimer {
          * <param name="sceneName">The name of the scene</param>
          */
         private void CommonSceneLoad(int buildIndex, string sceneName) {
+            if (timer == null) {
+                timer = new UI.Timer();
+            }
+
             timer.LoadScene(sceneName);
         }
 
