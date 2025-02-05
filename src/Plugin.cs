@@ -53,6 +53,15 @@ namespace InGameTimer {
             CommonUpdate();
         }
 
+        /**
+         * <summary>
+         * Executes to render GUIs.
+         * </summary>
+         */
+        public void OnGUI() {
+            CommonGUI();
+        }
+
 #elif MELONLOADER
 
 using MelonLoader;
@@ -82,9 +91,19 @@ namespace InGameTimer {
             CommonSceneLoad(buildIndex, sceneName);
         }
 
+        /**
+         * <summary>
+         * Executes to render GUIs.
+         * </summary>
+         */
+        public override void OnGUI() {
+            CommonGUI();
+        }
+
 #endif
         private static Plugin plugin = null;
 
+        private UI.Info info = null;
         private UI.Timer timer = null;
 
         public Plugin() {
@@ -103,6 +122,10 @@ namespace InGameTimer {
                 timer = new UI.Timer();
             }
 
+            if (info == null) {
+                info = new UI.Info(timer);
+            }
+
             timer.LoadScene(sceneName);
         }
 
@@ -112,7 +135,20 @@ namespace InGameTimer {
          * </summary>
          */
         private void CommonUpdate() {
+            if (Input.GetKeyDown(KeyCode.PageDown)) {
+                info.Toggle();
+            }
+
             timer.Update();
+        }
+
+        /**
+         * <summary>
+         * Common code to render GUIs.
+         * </summary>
+         */
+        private void CommonGUI() {
+            info.Render();
         }
 
         /**
