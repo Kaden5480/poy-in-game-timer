@@ -44,6 +44,8 @@ namespace InGameTimer.Categories {
             foreach (Progression.Tool tool in Progression.Tools.tools) {
                 yield return (tool.displayName, tool.IsUnlocked().ToString());
             }
+
+            yield return ("Ropes", $"{GameManager.control.ropesCollected}/{Progression.Ropes.maxRopes}");
         }
     }
 
