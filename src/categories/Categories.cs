@@ -54,7 +54,8 @@ namespace InGameTimer.Categories {
         public Any() : base("Any%", Scenes.baseGamePeaks) {}
 
         public override bool EndTimer(string sceneName) {
-            return Scenes.normalEnding.IsScene(sceneName);
+            return GameManager.control.progression >= 32
+                && GameManager.control.category_3_progression >= 3;
         }
     }
 
