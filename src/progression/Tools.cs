@@ -38,10 +38,6 @@ namespace InGameTimer.Progression {
                 }
             }
 
-            if (GameManager.control.ropesCollected < 42) {
-                return false;
-            }
-
             return true;
         }
     }

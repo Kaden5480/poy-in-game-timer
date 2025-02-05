@@ -8,6 +8,7 @@ namespace InGameTimer.Categories {
         public override bool EndTimer(string sceneName) {
             return Progression.Peaks.CompletedBaseGame()
                 && Progression.Artefacts.UnlockedAllBaseGame()
+                && Progression.Ropes.UnlockedAll()
                 && Progression.Tools.UnlockedAll();
         }
 
