@@ -98,7 +98,7 @@ namespace InGameTimer.UI {
             contentObj.transform.SetParent(viewportObj.transform);
             scrollRect.content = contentRectTransform;
 
-            contentLayout.spacing = 5f;
+            //contentLayout.spacing = 5f;
 
             for (int i = 0; i < 20; i++) {
                 GameObject textObj = new GameObject("Example Text");

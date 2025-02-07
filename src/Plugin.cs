@@ -85,6 +85,7 @@ namespace InGameTimer {
 #endif
         private static Plugin plugin = null;
 
+        private UI.Info info = null;
         private UI.Timer timer = null;
 
         public Plugin() {
@@ -103,6 +104,10 @@ namespace InGameTimer {
                 timer = new UI.Timer();
             }
 
+            if (info == null) {
+                info = new UI.Info();
+            }
+
             timer.LoadScene(sceneName);
         }
 
@@ -112,6 +117,10 @@ namespace InGameTimer {
          * </summary>
          */
         private void CommonUpdate() {
+            if (Input.GetKeyDown(KeyCode.PageDown)) {
+                info.Toggle();
+            }
+
             timer.Update();
         }
 
