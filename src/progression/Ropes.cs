@@ -39,7 +39,7 @@ namespace InGameTimer.Progression {
             // NPC Encounters
             new Rope("greatgaol_encounter_oasclimber",  "+1 (Great Gaol NPC)"),
             new Rope("sthaelga_encounter_oasclimber",   "+1 (St Haelga NPC)"),
-        }
+        };
 
         public static bool UnlockedAll() {
             foreach (Rope rope in all) {

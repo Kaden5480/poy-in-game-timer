@@ -86,6 +86,7 @@ namespace InGameTimer {
         private static Plugin plugin = null;
 
         private UI.Timer timer = null;
+        private UI.CategoryPicker categoryPicker = null;
 
         public Plugin() {
             plugin = this;
@@ -103,6 +104,10 @@ namespace InGameTimer {
                 timer = new UI.Timer();
             }
 
+            if (categoryPicker == null) {
+                categoryPicker = new UI.CategoryPicker(timer);
+            }
+
             timer.LoadScene(sceneName);
         }
 
@@ -113,6 +118,7 @@ namespace InGameTimer {
          */
         private void CommonUpdate() {
             timer.Update();
+            categoryPicker.Update();
         }
 
         /**

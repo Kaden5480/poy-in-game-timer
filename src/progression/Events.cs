@@ -19,11 +19,11 @@ namespace InGameTimer.Progression {
             new Event("npc_oas_category1" , "Fundamentals Medal"),
             new Event("npc_oas_category2" , "Intermediate Medal"),
             new Event("npc_oas_category3" , "Advanced Medal"),
-        }
+        };
 
         public static bool UnlockedAll() {
-            foreach(Event event in baseGame) {
-                if (event.IsUnlocked() == false) {
+            foreach (Event ev in baseGame) {
+                if (ev .IsUnlocked() == false) {
                     return false;
                 }
             }
